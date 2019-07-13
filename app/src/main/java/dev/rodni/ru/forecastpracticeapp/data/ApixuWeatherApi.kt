@@ -1,7 +1,8 @@
 package dev.rodni.ru.forecastpracticeapp.data
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import dev.rodni.ru.forecastpracticeapp.data.response.CurrentWeatherResponse
+import dev.rodni.ru.forecastpracticeapp.data.network.ConnectivityInterceptor
+import dev.rodni.ru.forecastpracticeapp.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -23,7 +24,9 @@ interface ApixuWeatherApi {
     ) : Deferred<CurrentWeatherResponse>
 
     companion object {
-        operator fun invoke() : ApixuWeatherApi {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ) : ApixuWeatherApi {
             val requestInterceptor = Interceptor { chain ->  
                 val url = chain.request()
                     .url()
@@ -40,6 +43,7 @@ interface ApixuWeatherApi {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()

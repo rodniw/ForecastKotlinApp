@@ -1,4 +1,4 @@
-package dev.rodni.ru.forecastpracticeapp.data.response
+package dev.rodni.ru.forecastpracticeapp.data.network.response
 
 import com.google.gson.annotations.SerializedName
 import dev.rodni.ru.forecastpracticeapp.data.db.entity.CurrentWeatherEntry

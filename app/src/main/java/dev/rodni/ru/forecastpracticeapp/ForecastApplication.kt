@@ -1,6 +1,7 @@
 package dev.rodni.ru.forecastpracticeapp
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dev.rodni.ru.forecastpracticeapp.data.ApixuWeatherApi
 import dev.rodni.ru.forecastpracticeapp.data.db.ForecastDatabase
 import dev.rodni.ru.forecastpracticeapp.data.network.ConnectivityInterceptor
@@ -26,5 +27,10 @@ class ForecastApplication : Application(), KodeinAware {
         bind() from singleton { ApixuWeatherApi(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
     }
 }

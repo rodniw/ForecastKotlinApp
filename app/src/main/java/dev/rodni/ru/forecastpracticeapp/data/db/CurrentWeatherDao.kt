@@ -1,6 +1,7 @@
 package dev.rodni.ru.forecastpracticeapp.data.db
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -9,6 +10,7 @@ import dev.rodni.ru.forecastpracticeapp.data.db.entity.CurrentWeatherEntry
 import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.ImperialCurrentWeatherEntry
 import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.MetricCurrentWeatherEntry
 
+@Dao
 interface CurrentWeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

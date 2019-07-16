@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.constraintlayout.widget.Group
 import com.google.android.material.snackbar.Snackbar
 
 fun Context.toast(message: String) {
@@ -15,6 +16,10 @@ fun ProgressBar.show() {
 }
 
 fun ProgressBar.hide() {
+    visibility = View.GONE
+}
+
+fun Group.hide() {
     visibility = View.GONE
 }
 

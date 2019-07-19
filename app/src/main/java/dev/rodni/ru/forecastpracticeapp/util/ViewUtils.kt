@@ -19,6 +19,10 @@ fun ProgressBar.hide() {
     visibility = View.GONE
 }
 
+fun Group.show() {
+    visibility = View.VISIBLE
+}
+
 fun Group.hide() {
     visibility = View.GONE
 }

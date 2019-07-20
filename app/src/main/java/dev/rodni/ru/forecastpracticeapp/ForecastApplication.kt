@@ -9,6 +9,8 @@ import dev.rodni.ru.forecastpracticeapp.data.network.ConnectivityInterceptor
 import dev.rodni.ru.forecastpracticeapp.data.network.ConnectivityInterceptorImpl
 import dev.rodni.ru.forecastpracticeapp.data.network.WeatherNetworkDataSource
 import dev.rodni.ru.forecastpracticeapp.data.network.WeatherNetworkDataSourceImpl
+import dev.rodni.ru.forecastpracticeapp.data.provider.LocationProvider
+import dev.rodni.ru.forecastpracticeapp.data.provider.LocationProviderImpl
 import dev.rodni.ru.forecastpracticeapp.data.provider.UnitProvider
 import dev.rodni.ru.forecastpracticeapp.data.provider.UnitProviderImpl
 import dev.rodni.ru.forecastpracticeapp.data.repository.ForecastRepository
@@ -26,13 +28,21 @@ class ForecastApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@ForecastApplication))
 
+        //providers
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl() }
+        //db
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
+        //network
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { ApixuWeatherApi(instance()) }
+        //data source
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        //repos
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
+        //vm factory
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 

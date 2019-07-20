@@ -10,6 +10,7 @@ import dev.rodni.ru.forecastpracticeapp.data.db.entity.WeatherLocation
 
 @Dao
 interface WeatherLocationDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsert(weatherLocation: WeatherLocation)
 

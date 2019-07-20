@@ -1,6 +1,7 @@
 package dev.rodni.ru.forecastpracticeapp
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dev.rodni.ru.forecastpracticeapp.data.ApixuWeatherApi
 import dev.rodni.ru.forecastpracticeapp.data.db.ForecastDatabase
@@ -8,6 +9,8 @@ import dev.rodni.ru.forecastpracticeapp.data.network.ConnectivityInterceptor
 import dev.rodni.ru.forecastpracticeapp.data.network.ConnectivityInterceptorImpl
 import dev.rodni.ru.forecastpracticeapp.data.network.WeatherNetworkDataSource
 import dev.rodni.ru.forecastpracticeapp.data.network.WeatherNetworkDataSourceImpl
+import dev.rodni.ru.forecastpracticeapp.data.provider.UnitProvider
+import dev.rodni.ru.forecastpracticeapp.data.provider.UnitProviderImpl
 import dev.rodni.ru.forecastpracticeapp.data.repository.ForecastRepository
 import dev.rodni.ru.forecastpracticeapp.data.repository.ForecastRepositoryImpl
 import dev.rodni.ru.forecastpracticeapp.ui.weather.current.CurrentWeatherViewModelFactory
@@ -29,11 +32,13 @@ class ForecastApplication : Application(), KodeinAware {
         bind() from singleton { ApixuWeatherApi(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 }

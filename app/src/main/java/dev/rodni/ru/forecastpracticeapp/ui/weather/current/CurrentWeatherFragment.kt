@@ -63,7 +63,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             if (it == null) return@Observer
 
             group_loading.hide()
-            updateLocation("Kazan")
+            updateLocation("Казань")
             updateDayToToday()
             updateTemperatures(it.temperature, it.feelsLikeTemperature)
             updateCondition(it.conditionText)

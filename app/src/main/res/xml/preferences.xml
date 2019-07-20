@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:title="Разрешения">
+        <SwitchPreference
+                android:key="USE_DEVICE_LOCATION"
+                android:title="Использование геопозиционирования"
+                android:summary="Включите, если желаете получать погоду из места, где вы находитесь"
+                android:defaultValue="true"
+                android:disableDependentsState="true"/>
+
+        <EditTextPreference
+                android:key="CUSTOM_LOCATION"
+                android:title="Локация"
+                android:summary="Геоточка, для которой отображается погода"
+                android:defaultValue="Moscow"
+                android:dependency="USE_DEVICE_LOCATION"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="Система счисления">
+        <ListPreference
+                android:key="UNIT_SYSTEM"
+                android:title="Выбрать систему счисления"
+                android:summary="%s"
+                android:defaultValue="METRIC"
+                android:entries="@array/unitSystemEntries"
+                android:entryValues="@array/unitSystemValues"/>
+    </PreferenceCategory>
+</PreferenceScreen>

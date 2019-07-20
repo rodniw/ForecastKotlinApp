@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ForecastPracticeApp</string>
     <string name="check_internet_connectivity">Проверьте интернет соединение</string>
+    <string name="settings_text">Настройки</string>
+    <string name="today_text">Сегодня</string>
+    <string name="for_a_week_text">На неделю</string>
+    <string name="loading_text">Загрузка</string>
 </resources>

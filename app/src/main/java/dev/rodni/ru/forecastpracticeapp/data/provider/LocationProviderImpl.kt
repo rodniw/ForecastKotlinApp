@@ -1,8 +1,9 @@
 package dev.rodni.ru.forecastpracticeapp.data.provider
 
+import android.content.Context
 import dev.rodni.ru.forecastpracticeapp.data.db.entity.WeatherLocation
 
-class LocationProviderImpl : LocationProvider {
+class LocationProviderImpl(context: Context) : PreferenceProvider(context), LocationProvider {
     override suspend fun hasLocationChanged(lastWeatherLocation: WeatherLocation): Boolean {
         return true
     }

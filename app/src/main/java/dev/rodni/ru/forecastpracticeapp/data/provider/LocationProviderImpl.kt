@@ -1,9 +1,14 @@
 package dev.rodni.ru.forecastpracticeapp.data.provider
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import dev.rodni.ru.forecastpracticeapp.data.db.entity.WeatherLocation
+import dev.rodni.ru.forecastpracticeapp.util.LocationPermissionNotGrantedException
 import kotlinx.coroutines.Deferred
 
 const val USE_DEVICE_LOCATION = "USE_DEVICE_LOCATION"
@@ -13,6 +18,8 @@ class LocationProviderImpl(
     private val fusedLocationProviderClient: FusedLocationProviderClient,
     context: Context
 ) : PreferenceProvider(context), LocationProvider {
+    private val appContext = context.applicationContext
+
     override suspend fun hasLocationChanged(lastWeatherLocation: WeatherLocation): Boolean {
         val deviceLocationChanged = hasDeviceLocationChanged(lastWeatherLocation)
 
@@ -40,7 +47,16 @@ class LocationProviderImpl(
         return preferences.getBoolean(USE_DEVICE_LOCATION, true)
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLastDeviceLocation(): Deferred<Location?> {
-        return fusedLocationProviderClient.lastLocation
+        return if (hasLocationPermission())
+            fusedLocationProviderClient.lastLocation
+        else
+            throw LocationPermissionNotGrantedException("Permission not granted")
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(appContext,
+            Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 }

@@ -1,7 +1,9 @@
 package dev.rodni.ru.forecastpracticeapp
 
 import android.app.Application
+import android.content.Context
 import androidx.preference.PreferenceManager
+import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dev.rodni.ru.forecastpracticeapp.data.ApixuWeatherApi
 import dev.rodni.ru.forecastpracticeapp.data.db.ForecastDatabase
@@ -30,7 +32,8 @@ class ForecastApplication : Application(), KodeinAware {
 
         //providers
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
-        bind<LocationProvider>() with singleton { LocationProviderImpl() }
+        bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl(instance(), instance()) }
         //db
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }

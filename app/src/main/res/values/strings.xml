@@ -5,5 +5,5 @@
     <string name="today_text">Сегодня</string>
     <string name="for_a_week_text">На неделю</string>
     <string name="loading_text">Загрузка</string>
-    <string name="set_loc_permission_manually">Пожалуйста, разрешите геопозиционирование вручную в настройках.</string>
+    <string name="set_loc_permission_manually">Пожалуйста, введите Ваше местоположение вручную в настройках.</string>
 </resources>

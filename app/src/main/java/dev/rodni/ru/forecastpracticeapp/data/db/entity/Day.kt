@@ -1,4 +1,4 @@
-package dev.rodni.ru.forecastpracticeapp.data.network.response
+package dev.rodni.ru.forecastpracticeapp.data.db.entity
 
 
 import androidx.room.Embedded

@@ -21,7 +21,7 @@ class WeatherNetworkDataSourceImpl(
         try {
             val fetchedCurrentWeather = apixuWeatherApi
                 .getCurrentWeather(location, languageCode)
-                //.await()
+                .await()
             _downloadedCurrentWeather.postValue(fetchedCurrentWeather)
         } catch (e: NoInternetException) {
             //TODO: show the error with the snackbar
@@ -36,7 +36,7 @@ class WeatherNetworkDataSourceImpl(
         try {
             val fetchedFutureWeather = apixuWeatherApi
                 .getFutureWeather(location, COUNT_OF_DAYS, languageCode)
-            //.await()
+                .await()
             _downloadedFutureWeather.postValue(fetchedFutureWeather)
         } catch (e: NoInternetException) {
             //TODO: show the error with the snackbar

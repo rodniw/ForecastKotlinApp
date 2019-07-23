@@ -18,21 +18,22 @@ const val API_KEY = "ce87d753c17b4b31bc164326191007"
 
 interface ApixuWeatherApi {
 
+    //TODO: change both functions to the susped declaration, not Deferred<>
     @GET("current.json")
-    suspend fun getCurrentWeather(
+    fun getCurrentWeather(
         @Query("q") location: String,
         @Query("lang") languageCode: String = "ru"
-    ) : CurrentWeatherResponse
+    ) : Deferred<CurrentWeatherResponse>
     //retrofit now can support suspendable functions
             //: Deferred<CurrentWeatherResponse>
 
     //http://api.apixu.com/v1/forecast.json?key=ce87d753c17b4b31bc164326191007&q=Kazan&days=1
     @GET("forecast.json")
-    suspend fun getFutureWeather(
+    fun getFutureWeather(
         @Query("q") location: String,
         @Query("days") days: Int,
         @Query("lang") languageCode: String = "ru"
-    ) : FutureWeatherResponse
+    ) : Deferred<FutureWeatherResponse>
             //: Deferred<FutureWeatherResponse>
 
     companion object {

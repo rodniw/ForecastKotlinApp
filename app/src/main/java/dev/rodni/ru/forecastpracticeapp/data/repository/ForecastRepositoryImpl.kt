@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import dev.rodni.ru.forecastpracticeapp.data.db.CurrentWeatherDao
 import dev.rodni.ru.forecastpracticeapp.data.db.WeatherLocationDao
 import dev.rodni.ru.forecastpracticeapp.data.db.entity.WeatherLocation
-import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.UnitSpecificCurrentWeatherEntry
+import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
 import dev.rodni.ru.forecastpracticeapp.data.network.WeatherNetworkDataSource
 import dev.rodni.ru.forecastpracticeapp.data.network.response.CurrentWeatherResponse
 import dev.rodni.ru.forecastpracticeapp.data.provider.LocationProvider

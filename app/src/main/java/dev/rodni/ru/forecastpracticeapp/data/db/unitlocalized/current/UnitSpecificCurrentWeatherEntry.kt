@@ -1,4 +1,4 @@
-package dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized
+package dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.current
 
 interface UnitSpecificCurrentWeatherEntry {
     val temperature: Double

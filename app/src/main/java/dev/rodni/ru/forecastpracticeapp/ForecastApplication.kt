@@ -44,7 +44,7 @@ class ForecastApplication : Application(), KodeinAware {
         //data source
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         //repos
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance(), instance()) }
         //vm factory
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }

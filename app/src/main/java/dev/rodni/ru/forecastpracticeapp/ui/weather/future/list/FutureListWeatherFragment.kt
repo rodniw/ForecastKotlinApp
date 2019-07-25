@@ -1,21 +1,23 @@
 package dev.rodni.ru.forecastpracticeapp.ui.weather.future.list
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
 import dev.rodni.ru.forecastpracticeapp.R
+import dev.rodni.ru.forecastpracticeapp.ui.base.ScopedFragment
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
-class FutureListWeatherFragment : Fragment() {
+class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
 
-    companion object {
-        fun newInstance() = FutureListWeatherFragment()
-    }
+    override val kodein by kodein()
 
     private lateinit var viewModel: FutureListWeatherViewModel
+    private val factory: FutureListWeatherVMFactory by instance()
+    //private val factory: CurrentWeatherViewModelFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +28,7 @@ class FutureListWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FutureListWeatherViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, factory).get(FutureListWeatherViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

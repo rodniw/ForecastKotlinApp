@@ -18,6 +18,7 @@ import dev.rodni.ru.forecastpracticeapp.data.provider.UnitProviderImpl
 import dev.rodni.ru.forecastpracticeapp.data.repository.ForecastRepository
 import dev.rodni.ru.forecastpracticeapp.data.repository.ForecastRepositoryImpl
 import dev.rodni.ru.forecastpracticeapp.ui.weather.current.CurrentWeatherViewModelFactory
+import dev.rodni.ru.forecastpracticeapp.ui.weather.future.list.FutureListWeatherVMFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -37,6 +38,7 @@ class ForecastApplication : Application(), KodeinAware {
         //db
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<ForecastDatabase>().futureWeatherDao() }
         bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
         //network
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
@@ -47,6 +49,7 @@ class ForecastApplication : Application(), KodeinAware {
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance(), instance()) }
         //vm factory
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
+        bind() from provider { FutureListWeatherVMFactory(instance(), instance()) }
     }
 
     override fun onCreate() {

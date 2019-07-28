@@ -2,6 +2,7 @@ package dev.rodni.ru.forecastpracticeapp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -41,9 +42,13 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        //val type = Typeface.createFromAsset(assets, "font/mlight.ttf")
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
         bottom_nav.setupWithNavController(navController)
+        //bottom_nav.typ
+        //toolbar.typeface = type
 
         NavigationUI.setupActionBarWithNavController(this, navController)
 

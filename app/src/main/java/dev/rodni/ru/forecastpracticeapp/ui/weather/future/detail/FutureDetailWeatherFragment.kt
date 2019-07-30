@@ -8,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 
 import dev.rodni.ru.forecastpracticeapp.R
+import dev.rodni.ru.forecastpracticeapp.ui.base.ScopedFragment
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
-class FutureDetailWeatherFragment : Fragment() {
+class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
 
-    companion object {
-        fun newInstance() = FutureDetailWeatherFragment()
-    }
+    override val kodein by kodein()
 
     private lateinit var viewModel: FutureDetailWeatherViewModel
+
+    private val factory: FutureDetailWeatherVMFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +30,8 @@ class FutureDetailWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FutureDetailWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this, factory).get(FutureDetailWeatherViewModel::class.java)
+
     }
 
 }

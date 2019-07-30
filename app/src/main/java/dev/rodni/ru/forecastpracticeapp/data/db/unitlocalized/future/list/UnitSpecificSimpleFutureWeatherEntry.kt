@@ -1,4 +1,4 @@
-package dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future
+package dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.list
 
 import org.threeten.bp.LocalDate
 

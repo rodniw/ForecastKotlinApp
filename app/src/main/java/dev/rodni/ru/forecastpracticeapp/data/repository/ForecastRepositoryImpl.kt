@@ -6,7 +6,8 @@ import dev.rodni.ru.forecastpracticeapp.data.db.FutureWeatherDao
 import dev.rodni.ru.forecastpracticeapp.data.db.WeatherLocationDao
 import dev.rodni.ru.forecastpracticeapp.data.db.entity.WeatherLocation
 import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
-import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.detail.UnitSpecificDetailFutureWeatherEntry
+import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import dev.rodni.ru.forecastpracticeapp.data.network.WeatherNetworkDataSource
 import dev.rodni.ru.forecastpracticeapp.data.network.response.CurrentWeatherResponse
 import dev.rodni.ru.forecastpracticeapp.data.network.response.FutureWeatherResponse
@@ -39,8 +40,6 @@ class ForecastRepositoryImpl(
                 persistFetchedFutureWeather(newFutureWeather)
             }
         }
-        //
-        //}
     }
 
     //out inside of some generic means that we can use smth that implements class or interface of this generic
@@ -60,6 +59,17 @@ class ForecastRepositoryImpl(
             initWeatherData()
             return@withContext if (metric) futureWeatherDao.getSimpleWeatherForecastsMetric(startDate)
             else futureWeatherDao.getSimpleWeatherForecastsImperial(startDate)
+        }
+    }
+
+    override suspend fun getFutureWeatherByDay(
+        date: LocalDate,
+        metric: Boolean
+    ): LiveData<out UnitSpecificDetailFutureWeatherEntry> {
+        return withContext(Dispatchers.IO) {
+            initWeatherData()
+            return@withContext if(metric) futureWeatherDao.getDetailedWeatherByDateMetric(date)
+            else futureWeatherDao.getDetailedWeatherByDateImperial(date)
         }
     }
 

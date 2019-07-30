@@ -1,6 +1,5 @@
 package dev.rodni.ru.forecastpracticeapp.ui.weather.future.list
 
-import androidx.lifecycle.ViewModel;
 import dev.rodni.ru.forecastpracticeapp.data.provider.UnitProvider
 import dev.rodni.ru.forecastpracticeapp.data.repository.ForecastRepository
 import dev.rodni.ru.forecastpracticeapp.ui.base.WeatherViewModel

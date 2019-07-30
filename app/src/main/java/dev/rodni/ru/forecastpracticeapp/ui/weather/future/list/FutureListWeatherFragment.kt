@@ -13,7 +13,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import dev.rodni.ru.forecastpracticeapp.R
 import dev.rodni.ru.forecastpracticeapp.data.db.LocalDateConverter
-import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import dev.rodni.ru.forecastpracticeapp.ui.base.ScopedFragment
 import dev.rodni.ru.forecastpracticeapp.util.hide
 import kotlinx.android.synthetic.main.future_list_weather_fragment.*
@@ -23,7 +23,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDate
-import java.util.Collections.addAll
 
 class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
 
@@ -44,7 +43,7 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, factory).get(FutureListWeatherViewModel::class.java)
 
-        bindUI()
+        bindUI(    )
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {

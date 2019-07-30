@@ -1,11 +1,10 @@
 package dev.rodni.ru.forecastpracticeapp.ui.weather.future.list
 
-import android.widget.TextView
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import dev.rodni.ru.forecastpracticeapp.R
-import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
-import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
+import dev.rodni.ru.forecastpracticeapp.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import dev.rodni.ru.forecastpracticeapp.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_future_weather.*
 import org.threeten.bp.format.DateTimeFormatter

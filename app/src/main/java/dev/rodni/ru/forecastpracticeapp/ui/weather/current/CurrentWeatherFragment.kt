@@ -2,7 +2,9 @@ package dev.rodni.ru.forecastpracticeapp.ui.weather.current
 
 //import dev.rodni.ru.forecastpracticeapp.databinding.CurrentWeatherFragmentBinding
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +24,8 @@ import org.kodein.di.generic.instance
 @SuppressLint("SetTextI18n")
 class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
+    private val TAG = "CurrentWeatherFragment"
+
     override val kodein by kodein()
 
     private lateinit var viewModel: CurrentWeatherViewModel
@@ -29,11 +33,21 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
     //private lateinit
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.i(TAG, "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.i(TAG, "onCreate")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        Log.i(TAG, "onCreateView")
         return inflater.inflate(R.layout.current_weather_fragment, container, false)
         //var binding : CurrentWeatherFragmentBinding
         //        = DataBindingUtil.inflate(inflater, R.layout.current_weather_fragment, container, false)
@@ -45,7 +59,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        Log.i(TAG, "onActivityCreated")
         //setAnimatedVisibility(progressVisible, false)
         viewModel = ViewModelProviders.of(this, factory)
             .get(CurrentWeatherViewModel::class.java)
@@ -53,8 +67,39 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         bindUI()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(TAG, "onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i(TAG, "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i(TAG, "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.i(TAG, "onDetach")
     }
 
     private fun bindUI() = launch {

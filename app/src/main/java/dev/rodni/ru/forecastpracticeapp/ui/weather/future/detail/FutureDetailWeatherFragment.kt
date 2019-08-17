@@ -28,6 +28,8 @@ import org.threeten.bp.format.FormatStyle
 @SuppressLint("SetTextI18n")
 class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
 
+    private val TAG = "MainActivity"
+
     override val kodein by kodein()
 
     private val viewModelFactoryInstanceFactory

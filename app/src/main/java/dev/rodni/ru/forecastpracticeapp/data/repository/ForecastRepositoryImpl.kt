@@ -1,5 +1,6 @@
 package dev.rodni.ru.forecastpracticeapp.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import dev.rodni.ru.forecastpracticeapp.data.db.CurrentWeatherDao
 import dev.rodni.ru.forecastpracticeapp.data.db.FutureWeatherDao
@@ -31,7 +32,10 @@ class ForecastRepositoryImpl(
     private val locationProvider: LocationProvider
 ) : ForecastRepository {
 
+    private val TAG = "ForecastRepositoryImpl"
+
     init {
+        Log.i(TAG, "init ForecastRepositoryImpl")
         weatherNetworkDataSource.apply {
             downloadedCurrentWeather.observeForever { newCurrentWeather ->
                 persistFetchedCurrentWeather(newCurrentWeather)

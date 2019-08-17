@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,6 +26,8 @@ private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
 
 class MainActivity : AppCompatActivity(), KodeinAware {
 
+    private val TAG = "MainActivity"
+
     override val kodein by kodein()
     private val fusedLocationProviderClient: FusedLocationProviderClient by instance()
 
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        Log.i(TAG, "onCreate")
 
         //val type = Typeface.createFromAsset(assets, "font/mlight.ttf")
 
@@ -62,10 +66,12 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        Log.i(TAG, "onSupportNavigateUp")
         return NavigationUI.navigateUp(navController, null)
     }
 
     private fun bindLocationManager() {
+        Log.i(TAG, "bindLocationManager")
         LifecycleBoundLocationManager(
             this,
             fusedLocationProviderClient, locationCallback
@@ -73,6 +79,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun requestLocationPermission() {
+        Log.i(TAG, "requestLocationPermission")
         ActivityCompat.requestPermissions(
             this,
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
@@ -81,6 +88,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun hasLocationPermission(): Boolean {
+        Log.i(TAG, "hasLocationPermission")
         return ContextCompat.checkSelfPermission(this,
             Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
@@ -90,6 +98,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        Log.i(TAG, "onRequestPermissionsResult")
         if (requestCode == MY_PERMISSION_ACCESS_COARSE_LOCATION) {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 bindLocationManager()
@@ -101,6 +110,42 @@ class MainActivity : AppCompatActivity(), KodeinAware {
                 ).show()
         }
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(TAG, "onStop")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.i(TAG, "onSaveInstanceState")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i(TAG, "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i(TAG, "onDestroy")
     }
 }
 

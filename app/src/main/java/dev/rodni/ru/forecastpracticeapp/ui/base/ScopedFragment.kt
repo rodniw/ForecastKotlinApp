@@ -8,6 +8,9 @@ import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
 abstract class ScopedFragment : Fragment(), CoroutineScope {
+
+    private val TAG = "ScopedFragment"
+
     private lateinit var job: Job
 
     override val coroutineContext: CoroutineContext
